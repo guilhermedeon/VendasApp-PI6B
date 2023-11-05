@@ -24,7 +24,7 @@ namespace VendasApp.WebApi.Controllers.Usuario
         [HttpPost]
         public ActionResult<object> Authenticate([FromBody] LoginRequest login)
         {
-            var loginResponse = new LoginResponse { };
+            var loginResponse = new LoginResponse();
             LoginRequest loginrequest = new()
             {
                 UserName = login.UserName.ToLower(),

@@ -12,14 +12,14 @@ namespace VendasApp.Application.Services.Database
             this._usuarioRepository = _usuarioRepository;
         }
 
-        public void Create(Usuario usuario)
+        public Usuario Create(Usuario usuario)
         {
-            _usuarioRepository.Create(usuario);
+            return _usuarioRepository.Create(usuario);
         }
 
-        public void Update(Usuario usuario)
+        public Usuario Update(Usuario usuario)
         {
-            _usuarioRepository.Update(usuario);
+            return _usuarioRepository.Update(usuario);
         }
 
         public void Delete(int id)

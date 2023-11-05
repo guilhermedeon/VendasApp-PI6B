@@ -12,14 +12,14 @@ namespace VendasApp.Application.Services.Database
             _pedidoRepository = pedidoRepository;
         }
 
-        public void Create(Pedido pedido)
+        public Pedido Create(Pedido pedido)
         {
-            _pedidoRepository.Create(pedido);
+            return _pedidoRepository.Create(pedido);
         }
 
-        public void Update(Pedido pedido)
+        public Pedido Update(Pedido pedido)
         {
-            _pedidoRepository.Update(pedido);
+            return _pedidoRepository.Update(pedido);
         }
 
         public void Delete(int id)

@@ -4,9 +4,9 @@ namespace VendasApp.Application.Services.Database.Interfaces
 {
     public interface IPedidoRepository
     {
-        public void Create(Pedido pedido);
+        public Pedido Create(Pedido pedido);
 
-        public void Update(Pedido pedido);
+        public Pedido Update(Pedido pedido);
 
         public void Delete(int id);
 

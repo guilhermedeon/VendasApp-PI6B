@@ -1,9 +1,7 @@
 ﻿namespace VendasApp.WebApi.Models.Item
 {
-    public class ItemDAO
+    public class ItemRequest
     {
-        public int Id { get; set; }
-
         public string Nome { get; set; }
 
         public string ValorUnitario { get; set; }

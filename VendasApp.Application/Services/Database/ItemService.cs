@@ -12,14 +12,14 @@ namespace VendasApp.Application.Services.Database
             _itemRepository = itemRepository;
         }
 
-        public void Create(Item item)
+        public Item Create(Item item)
         {
-            _itemRepository.Create(item);
+            return _itemRepository.Create(item);
         }
 
-        public void Update(Item item)
+        public Item Update(Item item)
         {
-            _itemRepository.Update(item);
+            return _itemRepository.Update(item);
         }
 
         public void Delete(int id)

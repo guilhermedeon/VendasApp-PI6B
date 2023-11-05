@@ -4,9 +4,9 @@ namespace VendasApp.Application.Services.Database.Interfaces
 {
     public interface IItemRepository
     {
-        public void Create(Item item);
+        public Item Create(Item item);
 
-        public void Update(Item item);
+        public Item Update(Item item);
 
         public void Delete(int id);
 

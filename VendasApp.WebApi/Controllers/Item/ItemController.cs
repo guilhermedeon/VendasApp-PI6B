@@ -21,45 +21,59 @@ namespace VendasApp.WebApi.Controllers.Item
 
         // GET: api/<ItemController>
         [HttpGet]
-        public List<Domain.Entities.Item> GetAll()
+        public ActionResult<List<ItemResponse>> GetAll()
         {
-            return _itemService.GetAll();
+            var result = new List<ItemResponse>();
+            var itens = _itemService.GetAll();
+            if (itens.Count > 0)
+            {
+                itens.ForEach(item =>
+                {
+                    ItemResponse it = new(item);
+                    result.Add(it);
+                });
+            }
+
+            return Ok(result);
         }
 
         // GET api/<ItemController>/5
         [HttpGet("{id}")]
-        public Domain.Entities.Item GetById(int id)
+        public ActionResult<ItemResponse> GetById(int id)
         {
-            return _itemService.GetById(id);
+            return Ok(new ItemResponse(_itemService.GetById(id)));
         }
 
         // POST api/<ItemController>
         [HttpPost]
-        public void Post([FromBody] CreateItemDAO item)
+        public ActionResult<ItemResponse> Post([FromBody] ItemRequest item)
         {
             Domain.Entities.Item it = new();
             it.Nome = item.Nome;
             it.Unidade = item.Unidade;
             it.ValorUnitario = item.ValorUnitario;
-            _itemService.Create(it);
+            var a = _itemService.Create(it);
+            return Ok(new ItemResponse(a));
         }
 
         // PUT api/<ItemController>/5
-        [HttpPut]
-        public void Put([FromBody] ItemDAO item)
+        [HttpPut("{id}")]
+        public ActionResult<ItemResponse> Put(int id, [FromBody] ItemRequest item)
         {
-            var it = _itemService.GetById(item.Id);
+            var it = _itemService.GetById(id);
             it.Nome = item.Nome;
             it.Unidade = item.Unidade;
             it.ValorUnitario = item.ValorUnitario;
-            _itemService.Update(it);
+            var a = _itemService.Update(it);
+            return Ok(new ItemResponse(a));
         }
 
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
             _itemService.Delete(id);
+            return NoContent();
         }
     }
 }

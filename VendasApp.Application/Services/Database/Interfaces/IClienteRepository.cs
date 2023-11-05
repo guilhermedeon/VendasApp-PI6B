@@ -4,9 +4,9 @@ namespace VendasApp.Application.Services.Database.Interfaces
 {
     public interface IClienteRepository
     {
-        public void Create(Cliente cliente);
+        public Cliente Create(Cliente cliente);
 
-        public void Update(Cliente cliente);
+        public Cliente Update(Cliente cliente);
 
         public void Delete(int id);
 

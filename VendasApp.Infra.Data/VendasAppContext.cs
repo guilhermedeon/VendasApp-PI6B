@@ -67,6 +67,8 @@ public partial class VendasAppContext : DbContext
 
             entity.ToTable("Pedido");
 
+            entity.HasMany(t => t.ItensPedido).WithOne(t => t.IdPedidoNavigation).HasPrincipalKey(t => t.Id);
+
             entity.Property(e => e.Data).HasColumnType("timestamp without time zone");
 
             entity.HasOne(d => d.IdVendedorNavigation).WithMany(d => d.Pedidos).HasForeignKey(d => d.IdVendedor).HasConstraintName("IdVendedor");

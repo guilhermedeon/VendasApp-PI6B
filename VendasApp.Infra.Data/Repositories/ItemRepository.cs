@@ -12,10 +12,11 @@ namespace VendasApp.Infra.Data.Repositories
             _appContext = appContext;
         }
 
-        public void Create(Item item)
+        public Item Create(Item item)
         {
-            _appContext.Items.Add(item);
+            var a = _appContext.Items.Add(item);
             _appContext.SaveChanges();
+            return a.Entity;
         }
 
         public void Delete(int id)
@@ -39,10 +40,11 @@ namespace VendasApp.Infra.Data.Repositories
             return _appContext.Items.Where(t => t.Nome == name).FirstOrDefault();
         }
 
-        public void Update(Item item)
+        public Item Update(Item item)
         {
-            _appContext.Items.Update(item);
+            var a = _appContext.Items.Update(item);
             _appContext.SaveChanges();
+            return a.Entity;
         }
     }
 }

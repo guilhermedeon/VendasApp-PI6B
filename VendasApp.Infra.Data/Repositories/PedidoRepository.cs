@@ -1,4 +1,5 @@
-﻿using VendasApp.Application.Services.Database.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using VendasApp.Application.Services.Database.Interfaces;
 using VendasApp.Domain.Entities;
 
 namespace VendasApp.Infra.Data.Repositories
@@ -12,10 +13,11 @@ namespace VendasApp.Infra.Data.Repositories
             _appContext = appContext;
         }
 
-        public void Create(Pedido pedido)
+        public Pedido Create(Pedido pedido)
         {
-            _appContext.Pedidos.Add(pedido);
+            var p = _appContext.Pedidos.Add(pedido);
             _appContext.SaveChanges();
+            return p.Entity;
         }
 
         public void Delete(int id)
@@ -26,18 +28,26 @@ namespace VendasApp.Infra.Data.Repositories
 
         public List<Pedido> GetByCliente(Cliente cliente)
         {
-            return _appContext.Pedidos.Where(t => t.IdCliente == cliente.Id).ToList();
+            var a = _appContext.Pedidos
+                .Include(t => t.ItensPedido)
+                .ThenInclude(t => t.IdItemNavigation)
+                .Where(t => t.IdCliente == cliente.Id).ToList();
+            return a;
         }
 
         public Pedido GetById(int id)
         {
-            return _appContext.Pedidos.Where(t => t.Id == id).FirstOrDefault();
+            return _appContext.Pedidos.Include(t => t.ItensPedido)
+                .ThenInclude(t => t.IdItemNavigation)
+                .Where(t => t.Id == id)
+                .FirstOrDefault();
         }
 
-        public void Update(Pedido pedido)
+        public Pedido Update(Pedido pedido)
         {
-            _appContext.Pedidos.Update(pedido);
+            var a = _appContext.Pedidos.Update(pedido);
             _appContext.SaveChanges();
+            return a.Entity;
         }
     }
 }

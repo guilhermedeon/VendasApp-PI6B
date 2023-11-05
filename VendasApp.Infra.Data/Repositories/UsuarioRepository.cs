@@ -12,10 +12,11 @@ namespace VendasApp.Infra.Data.Repositories
             _appContext = appContext;
         }
 
-        public void Create(Usuario usuario)
+        public Usuario Create(Usuario usuario)
         {
-            _appContext.Usuarios.Add(usuario);
+            var a = _appContext.Usuarios.Add(usuario);
             _appContext.SaveChanges();
+            return a.Entity;
         }
 
         public void Delete(int id)
@@ -34,10 +35,11 @@ namespace VendasApp.Infra.Data.Repositories
             return _appContext.Usuarios.Where(x => x.Username == name).FirstOrDefault();
         }
 
-        public void Update(Usuario usuario)
+        public Usuario Update(Usuario usuario)
         {
-            _appContext.Usuarios.Update(usuario);
+            var a = _appContext.Usuarios.Update(usuario);
             _appContext.SaveChanges();
+            return a.Entity;
         }
     }
 }

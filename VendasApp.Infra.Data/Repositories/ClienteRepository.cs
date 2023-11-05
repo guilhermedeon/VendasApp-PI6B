@@ -12,10 +12,11 @@ namespace VendasApp.Infra.Data.Repositories
             _appContext = appContext;
         }
 
-        public void Create(Cliente cliente)
+        public Cliente Create(Cliente cliente)
         {
-            _appContext.Clientes.Add(cliente);
+            var a = _appContext.Clientes.Add(cliente);
             _appContext.SaveChanges();
+            return a.Entity;
         }
 
         public void Delete(int id)
@@ -39,10 +40,11 @@ namespace VendasApp.Infra.Data.Repositories
             return _appContext.Clientes.Where(t => t.Nome == name).FirstOrDefault();
         }
 
-        public void Update(Cliente cliente)
+        public Cliente Update(Cliente cliente)
         {
-            _appContext.Clientes.Update(cliente);
+            var a = _appContext.Clientes.Update(cliente);
             _appContext.SaveChanges();
+            return a.Entity;
         }
     }
 }

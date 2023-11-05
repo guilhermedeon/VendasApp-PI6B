@@ -12,14 +12,14 @@ namespace VendasApp.Application.Services.Database
             this._clienteRepository = _clienteRepository;
         }
 
-        public void Create(Cliente cliente)
+        public Cliente Create(Cliente cliente)
         {
-            _clienteRepository.Create(cliente);
+            return _clienteRepository.Create(cliente);
         }
 
-        public void Update(Cliente cliente)
+        public Cliente Update(Cliente cliente)
         {
-            _clienteRepository.Update(cliente);
+            return _clienteRepository.Update(cliente);
         }
 
         public void Delete(int id)
